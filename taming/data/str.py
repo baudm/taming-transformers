@@ -25,8 +25,8 @@ class STRTrain(Dataset):
             T.Resize((opt.imgH, opt.imgW), T.InterpolationMode.BICUBIC),
             T.ToTensor(),
             T.Normalize(0.5, 0.5),
-            T.RandomVerticalFlip(),
-            T.RandomHorizontalFlip(),
+            #T.RandomVerticalFlip(),
+            #T.RandomHorizontalFlip(),
             # model expects data in channel-last format
             T.Lambda(lambda x: x.permute(1, 2, 0))
         ])
