@@ -469,9 +469,11 @@ if __name__ == "__main__":
             "target": "pytorch_lightning.callbacks.ModelCheckpoint",
             "params": {
                 "dirpath": ckptdir,
-                "filename": "{epoch:06}",
+                "filename": "{epoch}-{step}-{aeloss:.6f}",
                 "verbose": True,
                 "save_last": True,
+                "save_top_k": 5,
+                "monitor": "val/aeloss"
             }
         }
         if hasattr(model, "monitor"):
@@ -516,6 +518,7 @@ if __name__ == "__main__":
         callbacks_cfg = lightning_config.callbacks if hasattr(lightning_config, 'callbacks') else OmegaConf.create()
         callbacks_cfg = OmegaConf.merge(default_callbacks_cfg, callbacks_cfg)
         trainer_kwargs["callbacks"] = [instantiate_from_config(callbacks_cfg[k]) for k in callbacks_cfg]
+        trainer_kwargs["callbacks"] += [trainer_kwargs["checkpoint_callback"]]
 
         trainer = Trainer.from_argparse_args(trainer_opt, **trainer_kwargs)
 
