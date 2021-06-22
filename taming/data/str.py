@@ -7,8 +7,8 @@ from taming.data.dataset import hierarchical_dataset
 
 
 class opt:
-    imgH = 224
-    imgW = 224
+    imgH = 32
+    imgW = 128
     data_filtering_off = True
     PAD = False
     sensitive = True
