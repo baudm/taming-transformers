@@ -108,7 +108,7 @@ class VQModel(pl.LightningModule):
         rec_loss = log_dict_ae["val/rec_loss"]
         self.log("val/rec_loss", rec_loss,
                    prog_bar=True, logger=True, on_step=True, on_epoch=True, sync_dist=True)
-        self.log("val/aeloss", aeloss,
+        self.log("val_aeloss", aeloss,
                    prog_bar=True, logger=True, on_step=True, on_epoch=True, sync_dist=True)
         self.log_dict(log_dict_ae)
         self.log_dict(log_dict_disc)
@@ -238,7 +238,7 @@ class VQNoDiscModel(VQModel):
         output = pl.EvalResult(checkpoint_on=rec_loss)
         output.log("val/rec_loss", rec_loss,
                    prog_bar=True, logger=True, on_step=True, on_epoch=True)
-        output.log("val/aeloss", aeloss,
+        output.log("val_aeloss", aeloss,
                    prog_bar=True, logger=True, on_step=True, on_epoch=True)
         output.log_dict(log_dict_ae)
 

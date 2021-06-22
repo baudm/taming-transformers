@@ -469,11 +469,11 @@ if __name__ == "__main__":
             "target": "pytorch_lightning.callbacks.ModelCheckpoint",
             "params": {
                 "dirpath": ckptdir,
-                "filename": "{epoch}-{step}-{val/aeloss:.6f}",
+                "filename": "{epoch}-{step}-{val_aeloss:.6f}",
                 "verbose": True,
                 "save_last": True,
                 "save_top_k": 5,
-                "monitor": "val/aeloss"
+                "monitor": "val_aeloss"
             }
         }
         if hasattr(model, "monitor"):
